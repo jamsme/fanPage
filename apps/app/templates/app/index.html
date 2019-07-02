@@ -5,10 +5,17 @@
     <title>Arctic Monkeys</title>
     {% load static %}
     <link rel= "stylesheet" href= "{% static 'app/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Geo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
-        <div id="left"></div>
+        <div id="left">
+            {% load static %}
+            <img src="{% static "images/alexTurner.jpg" %}" alt="alexTurner">
+            <h3>WARP SPEED CHIC</h3>
+            <h4>Gifs and pictures to commemorate the <p>Arctic Monkeys</p></h4>
+        </div>
         <div id="right"></div>
     </div>
 </body>
