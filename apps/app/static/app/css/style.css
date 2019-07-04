@@ -29,22 +29,32 @@ img {
     height: 200px;
 }
 h3 {
-    font-size: 25px;
+    font-size: 14px;
+    font-weight:bolder;
     margin: 10px 0 0 0;
-    font-family: 'Geo', sans-serif;
-    color: #fcce68;
-    text-shadow: 1px 2px 1px black, 0 0 15px #ed2124, 0 0 3px #ed2124;
-}
-h4 {
-    margin: 10px 0;
-    font-size: 16px;
-    font-family: 'Catamaran', sans-serif;
-    font-weight: bolder;
+    font-family: Helvetica;
 }
 p {
+    margin: 10px 0 15px 0;
+    font-size: 11.30px;
+    font-family: Helvetica;
+}
+#nav {
+    width: 100%;
+    background-color: darkgray;
+}
+.navItems {
+    width: 100%;
+    height: 20px;
+    border-bottom: 1px solid grey;
+}
+h6 {
     margin: 0;
-    font-size: 20px;
-    font-family: 'Geo', sans-serif;
-    color: #fcce68;
-    text-shadow: 1px 2px 1px black, 0 0 15px #ed2124, 0 0 3px #ed2124;
+    padding: 4px 0 0 10px;
+    font-weight: 400;
+    font-family: Helvetica;
+}
+a, h6 {
+    color: black;
+    text-decoration: none;
 }
