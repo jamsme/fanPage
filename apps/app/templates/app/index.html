@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Arctic Monkeys</title>
-    {% load static %}
+    {% load staticfiles %}
     <link rel= "stylesheet" href= "{% static 'app/css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'app/js/jquery.js' %}"></script>
 </head>
 <body>
     <div id="container">
@@ -25,7 +27,17 @@
                 </a>
             </div>
         </div>
-        <div id="right"></div>
+        <div id="right">
+            <div class="content">
+                {% load static %}
+                <img src="{% static "images/alexT.jpg" %}" alt="concert alexTurner" class="cont">
+            </div>
+            <div class="content">
+                {% load static %}
+                <img src="{% static "images/hellcat.jpg" %}" alt="hellcat" class="cont">
+            </div>
+            <div class="content"></div>
+        </div>
     </div>
 </body>
 </html>
