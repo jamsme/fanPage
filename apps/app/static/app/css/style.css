@@ -1,21 +1,16 @@
 body {
-    margin: 0;
-}
-#container {
-    margin: auto;
-    width: 50%;
-    display: flex;
+    width: 710px;
+    margin: 0 auto;
+    padding-top: 20px;
 }
 #left {
-    margin: 0;
-    width: 25%;
+    width: 173px;
     padding: 10px;
-    display: inline-block;
-    vertical-align: top;
+    position: fixed;
 }
 #right {
-    width: 75%;
-    display: inline-block;
+    width: 505px;
+    float: right; 
 }
 img {
     width: 100%;
@@ -54,15 +49,11 @@ a, h6 {
     text-decoration: none;
 }
 .content {
-    width: 95%;
-    height: 450px;
     background-color: white;
     box-shadow: 0 0 5px #777474;
     margin: 10px auto 40px auto;
     padding: 5px;
 }
 img.cont {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
 }
