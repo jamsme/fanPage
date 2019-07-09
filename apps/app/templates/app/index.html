@@ -9,34 +9,42 @@
     <script type="text/javascript" src="{% static 'app/js/jquery.js' %}"></script>
 </head>
 <body>
-    <div id="container">
-        <div id="left">
-            {% load static %}
-            <img src="{% static "images/alexTurner.jpg" %}" alt="alexTurner">
-            <h3>Warp Speed Chic</h3>
-            <p>Gifs and pictures to commemorate the Arctic Monkeys</p>
-            <div id="nav">
-                <a href="">
-                    <div class="navItems"><h6>Home</h6></div>
-                </a>
-                <a href="/database">
-                    <div class="navItems"><h6>Database</h6></div>
-                </a>
-                <a href="/post">
-                    <div class="navItems"><h6>Post</h6></div>
-                </a>
-            </div>
+    <div id="left">
+        {% load static %}
+        <img src="{% static "images/alexTurner.jpg" %}" alt="alexTurner">
+        <h3>Warp Speed Chic</h3>
+        <p>Gifs and pictures to commemorate the Arctic Monkeys</p>
+        <div id="nav">
+            <a href="">
+                <div class="navItems"><h6>Home</h6></div>
+            </a>
+            <a href="/database">
+                <div class="navItems"><h6>Database</h6></div>
+            </a>
+            <a href="/post">
+                <div class="navItems"><h6>Post</h6></div>
+            </a>
         </div>
-        <div id="right">
-            <div class="content">
-                {% load static %}
-                <img src="{% static "images/alexT.jpg" %}" alt="concert alexTurner" class="cont">
-            </div>
-            <div class="content">
-                {% load static %}
-                <img src="{% static "images/hellcat.jpg" %}" alt="hellcat" class="cont">
-            </div>
-            <div class="content"></div>
+    </div>
+    <div id="right">
+            <iframe src="https://giphy.com/embed/3o7aCVqXn0idWFuDnO" width="480" height="254" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/netflix-season-2-stranger-things-3o7aCVqXn0idWFuDnO">via GIPHY</a></p>
+        <iframe src="https://giphy.com/embed/1xmSvIRJeKOCBtDBWs" width="100%" height="239" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+            <iframe src="https://giphy.com/embed/63oU3DYID24HC" width="100%" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        <div class="content">
+            {% load static %}
+            <img src="{% static "images/alexT.jpg" %}" alt="concert alexTurner" class="cont">
+        </div>
+        <div class="content">
+            {% load static %}
+            <img src="{% static "images/hellcat.jpg" %}" alt="hellcat" class="cont">
+        </div>
+        <div class="content">
+            {% load static %}
+            <img src="{% static "images/legUp.jpg" %}" alt="hellcat" class="cont">
+        </div>
+        <div class="content">
+            {% load static %}
+            <img src="{% static "images/allMonkeys.jpg" %}" alt="hellcat" class="cont">
         </div>
     </div>
 </body>
