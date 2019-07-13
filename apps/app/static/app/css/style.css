@@ -57,3 +57,30 @@ a, h6 {
 img.cont {
     height: 100%;
 }
+h4 {
+    font-weight: 500;
+    font-family: Helvetica;
+    margin: 10px 0 0 10px;
+}
+#contentPost {
+    background-color: #cec9c926;
+    box-shadow: 0 0 5px #777474;
+    border: 6px solid white;
+    margin: 10px auto 40px auto;
+    padding: 5px;
+    height: 500px;
+}
+form {
+    margin: 12px 0 0 8px;
+}
+input#submit {
+    display: block;
+    margin-top: 10px;
+    width: 20%;
+    background-color: #1a87e687;
+    border-radius: 5px;
+    font-weight: 400;
+    height: 25px;
+    font-size: 15px;
+    border: 1px solid black;
+}
