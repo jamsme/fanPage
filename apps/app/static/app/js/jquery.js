@@ -13,5 +13,11 @@ $(document).ready(function() {
     function() {
         $(this).css({"background-color": "lightgrey"});
     });
+    $('img#search').hover(function() {
+        $(this).css({"border": "2px solid blue"});
+    }, 
+    function() {
+        $(this).css({"border": "none"});
+    });
 
 });
