@@ -33,10 +33,14 @@
             <h4>Submit a post</h4>
             <form action="/submitPost" method="POST">
                 {% csrf_token %}
-                <input type="file" name="image">
+                <input type="text" name="search" placeholder="Search Gifs" id="search">
+                <input type="number" name="limit" placeholder="Number of post" id="number">
                 <input type="submit" value="Submit Post" id="submit">
             </form>
         </div>
+        {% for q in search.data %}
+            <a href="/append"><img src="{{q.images.original.url}}" id="search"></a>
+        {% endfor %}
     </div>
 </body>
 </html>
