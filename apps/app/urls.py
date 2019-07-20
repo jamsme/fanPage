@@ -6,4 +6,6 @@ urlpatterns = [
     path('post', views.passwordHtml),
     path('password', views.password),
     path('add', views.add),
+    path('submitPost', views.submitPost),
+    path('append', views.append),
 ]
