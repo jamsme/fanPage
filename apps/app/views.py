@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from .models import Post
 import re
 import json
 import urllib.request
 
 def index(request):
+    posts = Post.objects.all().order_by("-created_at")
 
-    return render(request, "app/index.html")
+    content = {
+        'post' : posts
+    }
+
+    return render(request, "app/index.html", content)
 
 def database(request):
     return render(request, "app/database.html")
@@ -35,7 +41,7 @@ def submitPost(request):
 
     if request.method == 'POST':
 
-        squish = p['search'].lower().replace(" ", "+")
+        squish = p['search'].replace(" ", "+")
         print(squish)
         urlData = "https://api.giphy.com/v1/gifs/search?q=" + squish + "&api_key=Zhk5VBNNWaswfFjyy5hlik8I87lE8bgi&limit=" + p['limit']
         webURL = urllib.request.urlopen(urlData)
@@ -50,7 +56,22 @@ def submitPost(request):
     return render(request, "app/add.html", content)
 
 def append(request):
-    return render(request, "app/append.html")
+    p = request.POST
+    
+    if request.method == 'POST':
+        
+        Post.objects.create(url=p["url"])
+        Post.objects.order_by("created_at")
+
+    return redirect("/")
+
+def delete(request, post_id):
+    bye = Post.objects.get(id=post_id)
+    print("delete")
+    print(bye)
+    bye.delete()
+
+    return redirect("/")
 
 
 
