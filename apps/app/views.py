@@ -15,7 +15,13 @@ def index(request):
     return render(request, "app/index.html", content)
 
 def database(request):
-    return render(request, "app/database.html")
+    posts = Post.objects.all().order_by("created_at")
+
+    content = {
+        'post' : posts
+    }
+
+    return render(request, "app/database.html", content)
 
 def passwordHtml(request):
     return render(request, "app/password.html")

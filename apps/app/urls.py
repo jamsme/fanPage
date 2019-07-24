@@ -8,4 +8,5 @@ urlpatterns = [
     path('add', views.add),
     path('submitPost', views.submitPost),
     path('append', views.append),
+    path('delete/<int:post_id>', views.delete),
 ]

@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
     $(".content").hover(function() {
-        $("img.cont",this).css({"margin-bottom": "50px"});
+        $("button#delete",this).css({"display": "unset"})
     },
     function() {
-        $("img.cont",this).css({"margin-bottom": "0px"});
+        $("button#delete",this).css({"display": "none"})
     });
 
     $("div.navItems").hover(function() {
@@ -13,11 +13,12 @@ $(document).ready(function() {
     function() {
         $(this).css({"background-color": "lightgrey"});
     });
-    $('img#search').hover(function() {
-        $(this).css({"border": "2px solid blue"});
+
+    $('div#hold').hover(function() {
+        $("input#add",this).css({"display": "unset"});
     }, 
     function() {
-        $(this).css({"border": "none"});
+        $("input#add",this).css({"display": "none"});
     });
 
 });

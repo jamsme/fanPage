@@ -30,16 +30,23 @@
     </div>
     <div id="right">
         <div id="contentPost">
-            <h4>Submit a post</h4>
+            <h4>Submit a Post</h4>
             <form action="/submitPost" method="POST">
                 {% csrf_token %}
                 <input type="text" name="search" placeholder="Search Gifs" id="search">
-                <input type="number" name="limit" placeholder="Number of post" id="number">
-                <input type="submit" value="Submit Post" id="submit">
+                <input type="number" name="limit" placeholder="Number of Post" id="number">
+                <input type="submit" value="Search" id="submit">
             </form>
         </div>
         {% for q in search.data %}
-            <a href="/append"><img src="{{q.images.original.url}}" id="search"></a>
+            <div id="hold">
+                <form action="/append" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{q.images.original.url}}" name="url">
+                    <img src="{{q.images.original.url}}" id="search">
+                    <input type="submit" value="Add" id="add">
+                </form>
+            </div>
         {% endfor %}
     </div>
 </body>
