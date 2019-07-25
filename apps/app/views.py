@@ -24,22 +24,31 @@ def database(request):
     return render(request, "app/database.html", content)
 
 def passwordHtml(request):
-    return render(request, "app/password.html")
+    if not "user_id" in request.session:
+        print("didn't get the password yet")
+        return render(request, "app/password.html")
+    else:
+        return redirect('/add')
 
 def password(request):
     p = request.POST
     
     if request.method == 'POST':
-        
+
         low = p['password'].lower()
         print(low)
         if low != 'dojo':
             messages.error(request, 'Not Worthy')
             return redirect('/post')
         else:
-            return redirect('/add')        
+            request.session["user_id"] = "user_id"
+            return redirect("/add")       
 
 def add(request):
+    if not "user_id" in request.session:
+        print("didn't get the password yet")
+        return redirect("/")
+    
     return render(request, "app/add.html")
 
 def submitPost(request):
