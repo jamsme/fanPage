@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $(".content").hover(function() {
+    $("div#database").hover(function() {
         $("button#delete",this).css({"display": "unset"})
     },
     function() {

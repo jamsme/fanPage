@@ -129,3 +129,7 @@ button#delete {
     border-radius: 4px;
     display: none;
 }
+#database {
+    display: inline-block;
+    width: 24.4%;
+}
