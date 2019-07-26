@@ -6,8 +6,47 @@
     {% load staticfiles %}
     <link rel= "stylesheet" href= "{% static 'app/css/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'app/js/jquery.js' %}"></script>
 </head>
 <body>
-
+    <div id="left">
+        {% load static %}
+        <a href="/">
+            <img src="{% static 'images/alexTurner.jpg' %}" alt="alexTurner">
+        </a>
+        <h3>Warp Speed Chic</h3>
+        <p>Gifs and pictures to commemorate the Arctic Monkeys</p>
+        <div id="nav">
+            <a href="/">
+                <div class="navItems">
+                    {% load static %}
+                    <img src="{% static 'images/homePNG.png' %}" alt="home" class="icon">
+                    <h6>Home</h6>
+                </div>
+            </a>
+            <a href="/database">
+                <div class="navItems">
+                    {% load static %}
+                    <img src="{% static 'images/files.png' %}" alt="home" class="icon">
+                    <h6>Database</h6>
+                </div>
+            </a>
+            <a href="/post">
+                <div class="navItems">
+                    {% load static %}
+                    <img src="{% static 'images/upload.png' %}" alt="home" class="icon">
+                    <h6>Add a Post</h6>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div id="right">
+        {% for q in post %}
+            <div id="database">
+                <img src="{{q.url}}" id="small">
+                <a href="/delete/{{q.id}}"><button id="delete">Delete</button></a>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
