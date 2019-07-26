@@ -15,7 +15,7 @@ def index(request):
     return render(request, "app/index.html", content)
 
 def database(request):
-    posts = Post.objects.all().order_by("created_at")
+    posts = Post.objects.all().order_by("-created_at")
 
     content = {
         'post' : posts
@@ -42,6 +42,7 @@ def password(request):
             return redirect('/post')
         else:
             request.session["user_id"] = "user_id"
+            request.session.set_expiry(1800)
             return redirect("/add")       
 
 def add(request):
