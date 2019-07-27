@@ -4,6 +4,7 @@ from .models import Post
 import re
 import json
 import urllib.request
+import random
 
 def index(request):
     posts = Post.objects.all().order_by("-created_at")
@@ -59,7 +60,9 @@ def submitPost(request):
 
         squish = p['search'].replace(" ", "+")
         print(squish)
-        urlData = "https://api.giphy.com/v1/gifs/search?q=" + squish + "&api_key=Zhk5VBNNWaswfFjyy5hlik8I87lE8bgi&limit=" + p['limit']
+        num = random.randint(1,200)
+        print(num)
+        urlData = "https://api.giphy.com/v1/gifs/search?q=" + squish + "&api_key=Zhk5VBNNWaswfFjyy5hlik8I87lE8bgi&offset=" + str(num) + "&limit=" + p['limit']
         webURL = urllib.request.urlopen(urlData)
         data = webURL.read()
         jsonObject = (json.loads(data.decode('utf-8')))
@@ -76,7 +79,9 @@ def append(request):
     
     if request.method == 'POST':
         
-        Post.objects.create(url=p["url"])
+        remove = p["title"].replace("GIF", "")
+        uppercase = remove.title()
+        Post.objects.create(url=p["url"], title=uppercase)
         Post.objects.order_by("created_at")
 
     return redirect("/")
@@ -87,7 +92,7 @@ def delete(request, post_id):
     print(bye)
     bye.delete()
 
-    return redirect("/")
+    return redirect("/database")
 
 
 

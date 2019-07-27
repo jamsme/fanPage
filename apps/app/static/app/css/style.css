@@ -57,7 +57,7 @@ a, h6 {
     background-color: white;
     box-shadow: 0 0 5px #777474;
     margin: 10px auto 40px auto;
-    padding: 5px;
+    padding: 10px;
 }
 img.cont {
     height: 100%;
@@ -132,4 +132,13 @@ button#delete {
 #database {
     display: inline-block;
     width: 24.4%;
+    margin-top: 10px; 
+}
+form#none {
+    margin: 0;
+}
+h4#title {
+    margin: 10px 0 5px 0;
+    text-align: center;
+    font-weight: bold;
 }
