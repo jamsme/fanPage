@@ -5,12 +5,22 @@ import re
 import json
 import urllib.request
 import random
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     posts = Post.objects.all().order_by("-created_at")
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(posts, 10)
+    try:
+        obj = paginator.page(page)
+    except PageNotAnInteger:
+        obj = paginator.page(1)
+    except EmptyPage:
+        obj = paginator.page(paginator.num_pages)
 
     content = {
-        'post' : posts
+        'obj' : obj
     }
 
     return render(request, "app/index.html", content)
@@ -21,8 +31,9 @@ def database(request):
     content = {
         'post' : posts
     }
-
+    
     return render(request, "app/database.html", content)
+
 
 def passwordHtml(request):
     if not "user_id" in request.session:
@@ -79,6 +90,7 @@ def append(request):
     
     if request.method == 'POST':
         
+        print(p["title"])
         remove = p["title"].replace("GIF", "")
         uppercase = remove.title()
         Post.objects.create(url=p["url"], title=uppercase)

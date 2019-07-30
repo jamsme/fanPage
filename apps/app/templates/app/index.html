@@ -39,9 +39,42 @@
                 </div>
             </a>
         </div>
+        {% if obj.has_other_pages %}
+            <ul class="pagination">
+                {% if obj.has_previous %}
+                    <li class="leftArrow">
+                        <a href="?page={{ obj.previous_page_number }}" id="a">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li class="leftArrow">
+                        <span>&laquo;</span>
+                    </li>
+                {% endif %}
+                {% for i in obj.paginator.page_range %}
+                    {% if obj.number == i %}
+                        <li class="active">
+                            <span>{{ i }}</span>
+                        </li>
+                    {% else %}
+                        <li class="inactive">
+                            <a href="?page={{ i }}" id="a">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if obj.has_next %}
+                    <li class="rightArrow">
+                        <a href="?page={{ obj.next_page_number }}" id="a">&raquo;</a>
+                    </li>
+                {% else %}
+                    <li class="rightArrow">
+                        <span>&raquo;</span>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
     </div>
     <div id="right">
-        {% for q in post %}
+        {% for q in obj %}
             <div class="content">
                 <img src="{{q.url}}"class="cont">
                 <h4 id="title">{{ q.title }}</h4>

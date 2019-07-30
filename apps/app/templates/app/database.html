@@ -44,7 +44,11 @@
         {% for q in post %}
             <div id="database">
                 <img src="{{q.url}}" id="small">
-                <a href="/delete/{{q.id}}"><button id="delete">Delete</button></a>
+                {% if "user_id" in request.session %}
+                    <a href="/delete/{{q.id}}" id="delete">
+                        <button id="delete">Delete</button>
+                    </a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
