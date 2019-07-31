@@ -28,8 +28,13 @@ def index(request):
 def database(request):
     posts = Post.objects.all().order_by("-created_at")
 
+    one = Post.objects.all().order_by("-created_at").first()
+    # date = one.created_at
+    # gotMonth = date.strftime('%B')
+
     content = {
         'post' : posts
+        # 'month' : gotMonth
     }
     
     return render(request, "app/database.html", content)
@@ -65,6 +70,10 @@ def add(request):
     return render(request, "app/add.html")
 
 def submitPost(request):
+    if not "user_id" in request.session:
+        print("didn't get the password yet")
+        return redirect("/")
+
     p = request.POST
 
     if request.method == 'POST':
@@ -81,7 +90,7 @@ def submitPost(request):
         content = {
             'search' : jsonObject
         }
-        # print(json.dumps(jsonObject, sort_keys=True, indent=4))
+
 
     return render(request, "app/add.html", content)
 
@@ -89,6 +98,20 @@ def append(request):
     p = request.POST
     
     if request.method == 'POST':
+
+        check = Post.objects.all()
+        gotUrl = p['url'].split("/")
+        # print(gotUrl[4])
+
+        for q, val in enumerate(check):
+            res = val.__dict__['url']
+            splitDatabase = res.split("/")
+            # print("DATABASE ========== ",q,splitDatabase[4])
+            if splitDatabase[4] == gotUrl[4]:
+                print("Already have it",splitDatabase[4],"=",gotUrl[4])
+                messages.error(request, 'Already have that one')
+                return redirect("/add")
+
         
         print(p["title"])
         remove = p["title"].replace("GIF", "")
