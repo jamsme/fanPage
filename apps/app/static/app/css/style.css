@@ -174,3 +174,22 @@ span, a#a {
     font-size: 13px;
     font-family: Helvetica;
 }
+h1 {
+    margin: 0 0 5px 0;
+    font-family: Helvetica;
+    font-weight: 300;
+}
+h3.message {
+    text-align: center;
+    color: red;
+    font-family: Helvetica;
+    font-weight: bolder;
+    width: 31%;
+    margin: 15px 0 10px 8px;
+}
+#giphy {
+    object-fit: contain;
+    height: 30px;
+    background-color: black;
+    border-radius: 4px;
+}

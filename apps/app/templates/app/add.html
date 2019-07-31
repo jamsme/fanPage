@@ -49,6 +49,11 @@
                 <input type="number" name="limit" placeholder="Number of Post" id="number">
                 <input type="submit" value="Search" id="submit">
             </form>
+            {% if messages %}
+                {% for message in messages %}
+                    <h3 class="message">{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
         </div>
         {% for q in search.data %}
             <div id="hold">
@@ -56,7 +61,7 @@
                     {% csrf_token %}
                     <input type="hidden" value="{{ q.images.original.url }}" name="url">
                     <input type="hidden" value="{{ q.title }}" name="title">
-                    <img src="{{q.images.original.url}}" id="search">
+                    <img src="{{ q.images.original.url }}" id="search">
                     <input type="submit" value="Add" id="add">
                 </form>
             </div>
