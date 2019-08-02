@@ -86,6 +86,7 @@ def submitPost(request):
         webURL = urllib.request.urlopen(urlData)
         data = webURL.read()
         jsonObject = (json.loads(data.decode('utf-8')))
+        # print(json.dumps(jsonObject, indent=4, sort_keys=True))
 
         content = {
             'search' : jsonObject
@@ -118,6 +119,41 @@ def append(request):
         uppercase = remove.title()
         Post.objects.create(url=p["url"], title=uppercase)
         Post.objects.order_by("created_at")
+
+    return redirect("/")
+
+def pinterest(request):
+    if not "user_id" in request.session:
+        print("didn't get the password yet")
+        return redirect("/")
+
+    p = request.POST
+
+    if request.method == 'POST':
+
+        user = "crispherr"
+        board = "arctic-monkeys"
+
+        urlData = "https://api.pinterest.com/v1/boards/" + user + "/" + board + "/pins/?access_token=AhsnUXwB2Af-ni4bS7OJoYnuKv6LFbau0T6pxb9GCvTzxADPaAbbgDAAANMJRgr6GlQAy3QAAAAA&fields=image,note&limit=" + p['limit']
+        webURL = urllib.request.urlopen(urlData)
+        data = webURL.read()
+        jsonObject = (json.loads(data.decode('utf-8')))
+        print(json.dumps(jsonObject, indent=4, sort_keys=True))
+
+        content = {
+            'pinData' : jsonObject
+        }
+        
+        return render(request, "app/add.html", content)
+
+def pinterestForm(request):
+    p = request.POST
+
+    if request.method == 'POST':
+
+        Post.objects.create(url=p["url"], title=p["title"])
+        Post.objects.order_by("created_at")
+        print("added === ", p['url'])
 
     return redirect("/")
 
