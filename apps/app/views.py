@@ -5,19 +5,14 @@ import re
 import json
 import urllib.request
 import random
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 def index(request):
     posts = Post.objects.all().order_by("-created_at")
     page = request.GET.get('page', 1)
-
     paginator = Paginator(posts, 10)
-    try:
-        obj = paginator.page(page)
-    except PageNotAnInteger:
-        obj = paginator.page(1)
-    except EmptyPage:
-        obj = paginator.page(paginator.num_pages)
+
+    obj = paginator.page(page)
 
     content = {
         'obj' : obj
@@ -76,7 +71,7 @@ def submitPost(request):
 
     p = request.POST
 
-    if request.method == 'POST':
+    if request.method == 'POST' and 'limit' in request.POST:
 
         squish = p['search'].replace(" ", "+")
         print(squish)
@@ -92,8 +87,7 @@ def submitPost(request):
             'search' : jsonObject
         }
 
-
-    return render(request, "app/add.html", content)
+        return render(request, "app/add.html", content)
 
 def append(request):
     p = request.POST
@@ -102,25 +96,26 @@ def append(request):
 
         check = Post.objects.all()
         gotUrl = p['url'].split("/")
-        # print(gotUrl[4])
 
         for q, val in enumerate(check):
             res = val.__dict__['url']
             splitDatabase = res.split("/")
-            # print("DATABASE ========== ",q,splitDatabase[4])
-            if splitDatabase[4] == gotUrl[4]:
-                print("Already have it",splitDatabase[4],"=",gotUrl[4])
-                messages.error(request, 'Already have that one')
-                return redirect("/add")
+            # print("DATABASE ========== ",q,splitDatabase)
 
-        
-        print(p["title"])
+            try:
+                splitDatabase.index(gotUrl[4])
+                messages.error(request, 'Already have that one')
+                print(":( Already have it")
+                return redirect("/add")
+            except ValueError:
+                print(":)")
+            
+        print("added", p["url"])
         remove = p["title"].replace("GIF", "")
         uppercase = remove.title()
         Post.objects.create(url=p["url"], title=uppercase)
         Post.objects.order_by("created_at")
-
-    return redirect("/")
+        return redirect("/")
 
 def pinterest(request):
     if not "user_id" in request.session:
@@ -129,21 +124,40 @@ def pinterest(request):
 
     p = request.POST
 
-    if request.method == 'POST':
+    if request.method == 'POST' and "limit" in request.POST:
 
         user = "crispherr"
         board = "arctic-monkeys"
+        limit = p['limit']
+        print(limit)
 
-        urlData = "https://api.pinterest.com/v1/boards/" + user + "/" + board + "/pins/?access_token=AhsnUXwB2Af-ni4bS7OJoYnuKv6LFbau0T6pxb9GCvTzxADPaAbbgDAAANMJRgr6GlQAy3QAAAAA&fields=image,note&limit=" + p['limit']
+        if limit == "":
+            limit = 25
+
+        print(limit)
+        urlData = "https://api.pinterest.com/v1/boards/" + user + "/" + board + "/pins/?access_token=AhsnUXwB2Af-ni4bS7OJoYnuKv6LFbau0T6pxb9GCvTzxADPaAbbgDAAANMJRgr6GlQAy3QAAAAA&fields=image,note&limit=" + str(limit)
         webURL = urllib.request.urlopen(urlData)
         data = webURL.read()
         jsonObject = (json.loads(data.decode('utf-8')))
-        print(json.dumps(jsonObject, indent=4, sort_keys=True))
+        # print(json.dumps(jsonObject, indent=4, sort_keys=True))
 
         content = {
             'pinData' : jsonObject
         }
-        
+            
+        return render(request, "app/add.html", content)
+
+    elif request.method == 'POST' and 'extra' in request.POST:
+
+        webURL = urllib.request.urlopen(p['extra'])
+        data = webURL.read()
+        jsonObject = (json.loads(data.decode('utf-8')))
+        # print(json.dumps(jsonObject, indent=4, sort_keys=True))
+
+        content = {
+            'pinData' : jsonObject
+        }
+            
         return render(request, "app/add.html", content)
 
 def pinterestForm(request):
@@ -151,16 +165,31 @@ def pinterestForm(request):
 
     if request.method == 'POST':
 
+        check = Post.objects.all()
+        gotUrl = p['url'].split("/")
+    
+        for q, val in enumerate(check):
+            res = val.__dict__['url']
+            splitDatabase = res.split("/")
+            # print("DATABASE ========== ",q,splitDatabase)
+
+            try:
+                splitDatabase.index(gotUrl[7])
+                messages.error(request, 'Already have that one')
+                print(":( Already have it")
+                return redirect("/add")
+            except:
+                print(":)")       
+        
         Post.objects.create(url=p["url"], title=p["title"])
         Post.objects.order_by("created_at")
-        print("added === ", p['url'])
-
-    return redirect("/")
+        print("added ", p['title'], " + ", p['url'])
+        return redirect("/")        
 
 def delete(request, post_id):
     bye = Post.objects.get(id=post_id)
     print("delete")
-    print(bye)
+    print(bye.url)
     bye.delete()
 
     return redirect("/database")
