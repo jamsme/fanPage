@@ -50,17 +50,9 @@
                         <span>&laquo;</span>
                     </li>
                 {% endif %}
-                {% for i in obj.paginator.page_range %}
-                    {% if obj.number == i %}
-                        <li class="active">
-                            <span>{{ i }}</span>
-                        </li>
-                    {% else %}
-                        <li class="inactive">
-                            <a href="?page={{ i }}" id="a">{{ i }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
+                    <li class="inactive">
+                        <span>{{ obj.number }} / {{ obj.paginator.num_pages }}</span>
+                    </li>
                 {% if obj.has_next %}
                     <li class="rightArrow">
                         <a href="?page={{ obj.next_page_number }}" id="a">&raquo;</a>

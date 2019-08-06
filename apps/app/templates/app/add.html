@@ -43,11 +43,16 @@
     <div id="right">
         <div id="contentPost">
             <h4>Submit a Post</h4>
-            <form action="/submitPost" method="POST">
+            <form action="/submitPost" method="POST" class="submit">
                 {% csrf_token %}
                 <input type="text" name="search" placeholder="Search Gifs" id="search">
-                <input type="number" name="limit" placeholder="Number of Post" id="number">
-                <input type="submit" value="Search" id="submit">
+                <input type="number" name="limit" placeholder="Number of Gifs" class="number">
+                <input type="submit" value="Search" class="submit">
+            </form>
+            <form action="/pinterest" method="POST" class="submit">
+                {% csrf_token %}
+                <input type="number" name="limit" placeholder="Pins From Pinterest" class="number">
+                <input type="submit" value="Search" id="pinterestSubmit">
             </form>
             {% if messages %}
                 {% for message in messages %}
@@ -57,15 +62,33 @@
         </div>
         {% for q in search.data %}
             <div id="hold">
-                <form action="/append" method="POST" id="none">
+                <form action="/append" method="POST" class="none">
                     {% csrf_token %}
+                    <img src="{{ q.images.original.url }}" id="search">
                     <input type="hidden" value="{{ q.images.original.url }}" name="url">
                     <input type="hidden" value="{{ q.title }}" name="title">
-                    <img src="{{ q.images.original.url }}" id="search">
                     <input type="submit" value="Add" id="add">
                 </form>
             </div>
         {% endfor %}
+        {% for q in pinData.data %}
+            <div id="hold">
+                <form action="/pinterestForm" method="POST" class="none">
+                    {% csrf_token %}
+                    <img src="{{ q.image.original.url }}" id="search">
+                    <input type="hidden" value="{{ q.image.original.url }}" name="url">
+                    <input type="hidden" value="{{ q.note }}" name="title">
+                    <input type="submit" value="Add" id="add">
+                </form>
+            </div>
+        {% endfor %}
+        {% if pinData %}
+            <form action="/pinterest" method="POST" id="extra">
+                {% csrf_token %}
+                <input type="hidden" value="{{ pinData.page.next }}" name="extra">
+                <input type="submit" value="More" id="extra">
+            </form>
+        {% endif %}
     </div>
 </body>
 </html>

@@ -74,13 +74,13 @@ h4 {
     margin: 10px auto 40px auto;
     padding: 5px;
 }
-form {
-    margin: 10px 0 5px 8px;
+form.submit {
+    margin: 10px 15px 5px 8px;
+    display: inline-block;
 }
-input#submit {
+input.submit {
     display: block;
     margin-top: 10px;
-    width: 21%;
     color: white;
     background-color: #017ce6;
     border-radius: 5px;
@@ -102,7 +102,7 @@ input#search {
     text-align: center;
     font-family: Helvetica;
 }
-input#number {
+input.number {
     display: block;
     margin-top: 5px;
     height: 20px;
@@ -120,6 +120,17 @@ input#add {
     border-radius: 4px;
     display: none;
 }
+input#pinterestSubmit {
+    display: block;
+    margin-top: 10px;
+    color: white;
+    background-color: #e60023;
+    border-radius: 5px;
+    font-weight: 400;
+    height: 28px;
+    font-size: 15px;
+    font-family: Helvetica;
+}
 button#delete {
     width: 100%;
     height: 30px;
@@ -134,7 +145,7 @@ button#delete {
     width: 24.4%;
     margin-top: 10px; 
 }
-form#none {
+form.none {
     margin: 0;
 }
 h4#title {
@@ -154,18 +165,10 @@ li.leftArrow, li.rightArrow {
     height: 20px;
     border-radius: 4px;
 }
-li.active {
-    display: inline-block;
-    border: 2px solid black;
-    width: 19px;
-    border-radius: 4px;
-    height: 20px;
-    background-color: lavender;
-}
 li.inactive {
     display: inline-block;
     border: 2px solid black;
-    width: 19px;
+    width: 35px;
     border-radius: 4px;
     height: 20px;
 }
@@ -192,4 +195,21 @@ h3.message {
     height: 30px;
     background-color: black;
     border-radius: 4px;
+}
+form#extra {
+    margin: 10px 0 15px 0;
+    width: 100%;
+    display: inline-block;
+}
+input#extra {
+    display: block;
+    margin-top: 10px;
+    color: white;
+    background-color: #e60023;
+    border-radius: 5px;
+    font-weight: 400;
+    height: 28px;
+    font-size: 15px;
+    font-family: Helvetica;
+    width: 100%;
 }
