@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Post
-import re
 import json
 import urllib.request
 import random
@@ -36,11 +35,13 @@ def database(request):
 
 
 def passwordHtml(request):
-    if not "user_id" in request.session:
+    if "user_id" in request.session:
+        return redirect('/add')
+    elif "tom" in request.session:
+        return redirect('/add')
+    else:
         print("didn't get the password yet")
         return render(request, "app/password.html")
-    else:
-        return redirect('/add')
 
 def password(request):
     p = request.POST
@@ -49,23 +50,35 @@ def password(request):
 
         low = p['password'].lower()
         print(low)
-        if low != 'dojo':
-            messages.error(request, 'Not Worthy')
-            return redirect('/post')
-        else:
+
+        if low == 'dojo':
             request.session["user_id"] = "user_id"
             request.session.set_expiry(1800)
             return redirect("/add")       
+        elif low == 'tomdelonge182':
+            request.session["tom"] = "tom"
+            request.session.set_expiry(1800)
+            return redirect("/add")
+        else:
+            messages.error(request, 'Not Worthy')
+            return redirect('/post')
 
 def add(request):
-    if not "user_id" in request.session:
+    if "user_id" in request.session:
+        return render(request, "app/add.html")
+    elif "tom" in request.session:
+        return render(request, "app/add.html")
+    else:
         print("didn't get the password yet")
         return redirect("/")
     
-    return render(request, "app/add.html")
 
 def submitPost(request):
-    if not "user_id" in request.session:
+    if "user_id" in request.session:
+        print("session id stil good")
+    elif "tom" in request.session:
+        print("session id is still good")
+    else:
         print("didn't get the password yet")
         return redirect("/")
 
@@ -118,23 +131,28 @@ def append(request):
         return redirect("/")
 
 def pinterest(request):
-    if not "user_id" in request.session:
+    if "user_id" in request.session:
+        print("session id stil good")
+    elif "tom" in request.session:
+        print("session id is still good")
+    else:
         print("didn't get the password yet")
         return redirect("/")
+
 
     p = request.POST
 
     if request.method == 'POST' and "limit" in request.POST:
 
-        user = "crispherr"
+        user = "melmonkeys"
         board = "arctic-monkeys"
         limit = p['limit']
-        print(limit)
+        # print(limit)
 
         if limit == "":
             limit = 25
 
-        print(limit)
+        # print(limit)
         urlData = "https://api.pinterest.com/v1/boards/" + user + "/" + board + "/pins/?access_token=AhsnUXwB2Af-ni4bS7OJoYnuKv6LFbau0T6pxb9GCvTzxADPaAbbgDAAANMJRgr6GlQAy3QAAAAA&fields=image,note&limit=" + str(limit)
         webURL = urllib.request.urlopen(urlData)
         data = webURL.read()
