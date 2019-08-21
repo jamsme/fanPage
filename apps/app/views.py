@@ -33,7 +33,6 @@ def database(request):
     
     return render(request, "app/database.html", content)
 
-
 def passwordHtml(request):
     if "user_id" in request.session:
         return redirect('/add')

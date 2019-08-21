@@ -10,5 +10,5 @@ urlpatterns = [
     path('append', views.append),
     path('delete/<int:post_id>', views.delete),
     path('pinterest', views.pinterest),
-    path('pinterestForm', views.pinterestForm)
+    path('pinterestForm', views.pinterestForm),
 ]

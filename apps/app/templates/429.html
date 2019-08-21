@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Warp Speed Chic</title>
+    {% load staticfiles %}
+    <link rel= "stylesheet" href= "{% static 'app/css/style.css' %}">
 </head>
-<body>
-    <h4>Too many requests</h4>
+<body id="body">
+    <div id="error">
+        <h4 id="error">Too<br>Many<br>Request</h4>
+        <a href="/" id="error">
+            <button id="error">HOME</button>
+        </a>
+    </div>
 </body>
 </html>

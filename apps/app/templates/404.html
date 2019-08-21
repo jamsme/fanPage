@@ -6,7 +6,12 @@
     {% load staticfiles %}
     <link rel= "stylesheet" href= "{% static 'app/css/style.css' %}">
 </head>
-<body>
-    <h4>This is my 404 page</h4>
+<body id="body">
+    <div id="error">
+        <h4 id="error">Url<br>Doesn't<br>Exist</h4>
+        <a href="/" id="error">
+            <button id="error">HOME</button>
+        </a>
+    </div>
 </body>
 </html>

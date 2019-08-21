@@ -160,21 +160,17 @@ ul.pagination {
 }
 li.leftArrow, li.rightArrow {
     display: inline-block;
-    border: 2px solid black;
     width: 19px;
     text-align: center;
-    height: 20px;
+    background-color: lightgrey;
     border-radius: 4px;
+    height: 16px;
 }
 li.inactive {
     display: inline-block;
-    border: 2px solid black;
-    width: 35px;
-    border-radius: 4px;
-    height: 20px;
+    margin: 0 4px 0 4px;
 }
 span, a#a {
-    vertical-align: middle;
     font-size: 13px;
     font-family: Helvetica;
 }
@@ -213,4 +209,28 @@ input#extra {
     font-size: 15px;
     font-family: Helvetica;
     width: 100%;
+}
+#body {
+    background-color: honeydew;
+}
+#error {
+    text-align: center;
+}
+h4#error {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: cursive;
+    margin: 66px 0 66px 0;
+}
+a#error {
+    color: red;
+    text-decoration: none;
+}
+button#error {
+    width: 80px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    font-size: 13px;
 }
